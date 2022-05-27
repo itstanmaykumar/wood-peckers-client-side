@@ -13,9 +13,9 @@ const DownloadApp = () => {
                 <div className="col-lg-6 pe-4 order-lg-0">
                     <p className="mb-2 text-second ">Download Our App Now</p>
                     <h1 className="mb-3">We Are <span className="text-main">Just One Tap Away.</span> <br />Acess Everything Anytime, <br />From <span className="text-main">Anywhere.</span></h1>
-                    <small className="mb-2 d-block text-secondary">Get the best quality in the market for the lowest price. Acess anywhere from your phone by getting our mobile app from play store.</small>
+                    <small className="d-block text-secondary">Get the best quality in the market for the lowest price. Acess anywhere from your phone by getting our mobile app from play store.</small>
                     <Link className="mt-5 fw-bolder " to="/playstore">
-                        <img className='d-block mt-4' height="50" src={androidApp} alt="" />
+                        <img className='d-inline-block mt-4' height="50" src={androidApp} alt="" />
                     </Link>
                 </div>
             </div>

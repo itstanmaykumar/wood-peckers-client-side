@@ -89,11 +89,17 @@
 }
 
 .foo-hover:hover {
-  color: white;
+  color: white !important;
 }
 
 .ico:hover {
   color: #FF8B87 !important;
+}
+
+.summery {
+  background-image: url(../src/media/summery.svg);
+  background-size: cover;
+  min-height: 450px;
 }
 
 .pointer {
