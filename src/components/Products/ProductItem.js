@@ -24,12 +24,12 @@ const ProductItem = ({ product }) => {
                                 <span className='d-block fw-bolder text-dark'>${price}</span>
                             </small>
                         </div>
-                        <div className='pt-2 pb-3 px-3'>
-                            <small>{text.slice(0, 100)}...<span /*onClick={() => handleCourseDetails(id)}*/ className="fw-bolder cursor-pointer">Read more</span></small>
+                        <div className='pt-2 px-3'>
+                            <small className='text-secondary text-ss'>{text.slice(0, 55)}...<span /*onClick={() => handleCourseDetails(id)}*/ className="fw-bolder cursor-pointer">Read more</span></small>
                         </div>
                     </div>
                     <div className="pb-3 text-center">
-                        <p className='pt-1 mb-0 px-3 text-start'>Available Quantity: <span className='fw-bolder text-main'>{stock}</span></p>
+                        <p className='pt-2 mb-0 px-3 text-start'>Available Quantity: <span className='fw-bolder text-main'>{stock}</span></p>
                         <small className='d-block text-start text-main text-ss px-3 pb-3'>Minimum Order Quantity: {minOrder}</small>
                         <button onClick={() => handleProductDetails(_id)} className='btn btn-dark shadow' to='/productdtails'>Order Now <FontAwesomeIcon className='ps-2' icon={faCaretRight} /></button>
                     </div>
