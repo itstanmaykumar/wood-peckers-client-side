@@ -1,16 +1,13 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-
-const useProduct = (id) => {
-    const [product, setProduct] = useState([]);
+const useProducts = () => {
+    const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get(`https://wood-peckers.herokuapp.com/products/${id}`)
-            .then(res => {
-                setProduct(res.data);
-            })
-    }, [id]);
-    return [product, setProduct]
+        fetch('https://wood-peckers.herokuapp.com/products')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, []);
+    return [products, setProducts];
 };
 
-export default useProduct;
+export default useProducts;

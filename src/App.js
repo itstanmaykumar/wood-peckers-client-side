@@ -9,7 +9,7 @@ import Navbar from "./components/Shared/Navbar";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>

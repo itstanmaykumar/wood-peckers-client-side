@@ -3,6 +3,14 @@
   text-decoration: none;
 }
 
+.text-ss {
+  font-size: 12px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .logo-f {
   font-family: 'Lobster', cursive;
 }
