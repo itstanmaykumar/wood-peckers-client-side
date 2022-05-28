@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.init';
 import useUser from '../../hooks/useUser';
 
@@ -16,15 +17,17 @@ const Profile = () => {
                 {
                     user.email ? (
                         <div className="row mx-2 my-5 align-items-center justify-content-center">
-                            <div className="col-2 d-flex align-items-center justify-content-center">
+                            <div className="col-4 col-md-3 d-flex align-items-center justify-content-center">
                                 <img className="d-block w-100 rounded-circle" src={user.img} alt={user.name} />
                             </div>
-                            <div className="col-4">
+                            <div className="col-7 col-md-5">
                                 <h3 className='m-0 p-0'>{user.name}</h3>
                                 {
                                     user.role && <small className="text-main">Admin</small>
                                 }
-                                <small className="d-block text-ss mt-2">From: {user.location}</small>
+                                {
+                                    user.profession && <p>{user.profession}</p>
+                                }
                             </div>
                             {
                                 user.bio && <div>
@@ -34,6 +37,13 @@ const Profile = () => {
                             }
                             <h4 className='text-center mt-5 text-main'>Contact</h4>
                             <p><span className='text-main fw-bolder pe-2'>Email:</span> {user.email}</p>
+                            <p><span className='text-main fw-bolder pe-2'>Address:</span> {user.location}</p>
+                            {
+                                user.phone && <p><span className='text-main fw-bolder pe-2'>Phone:</span> {user.phone}</p>
+                            }
+                            {
+                                user.linkedIn && <p><span className='text-main fw-bolder pe-2'>LinkedIn:</span> <a className='text-white' href={user.linkedIn} target="_blank">{user.linkedIn}</a></p>
+                            }
                         </div>
                     ) : (
                         <div className='d-flex my-5 text-main justify-content-center'>

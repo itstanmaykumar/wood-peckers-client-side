@@ -20,7 +20,10 @@ const MyProfile = () => {
             email: e.target.email.value,
             img: e.target.img.value,
             location: e.target.location.value,
-            bio: e.target.bio.value
+            bio: e.target.bio.value,
+            profession: e.target.profession.value,
+            phone: e.target.phone.value,
+            linkedIn: e.target.linkedIn.value
         };
 
         axios.put("https://wood-peckers.herokuapp.com/users", userUpdate)
@@ -69,6 +72,18 @@ const MyProfile = () => {
                                     <div className="my-4">
                                         <label htmlFor="bio" className="form-label">Edit Bio</label>
                                         <textarea type="text" className="form-control" name="bio" defaultValue={user.bio} />
+                                    </div>
+                                    <div className="my-4">
+                                        <label htmlFor="profession" className="form-label">Profession</label>
+                                        <input type="text" className="form-control" name="profession" defaultValue={user.profession} />
+                                    </div>
+                                    <div className="my-4">
+                                        <label htmlFor="phone" className="form-label">Phone Number</label>
+                                        <input type="text" className="form-control" name="phone" defaultValue={user.phone} />
+                                    </div>
+                                    <div className="my-4">
+                                        <label htmlFor="linkedIn" className="form-label">LinkedIn Profile</label>
+                                        <input type="text" className="form-control" name="linkedIn" defaultValue={user.linkedIn} />
                                     </div>
                                     <button type="submit" className="mt-4 btn btn-main box">Update Profile</button>
                                 </form>
