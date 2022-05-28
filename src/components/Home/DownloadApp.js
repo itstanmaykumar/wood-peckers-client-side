@@ -5,7 +5,7 @@ import androidApp from '../../media/android.png';
 
 const DownloadApp = () => {
     return (
-        <div className="container mb-4">
+        <div className="container my-4">
             <div className="row justify-content-between align-items-center">
                 <div className="col-lg-6 col-10 order-lg-1">
                     <img className="w-100 p-3" src={mobileApp} alt="banner img" />

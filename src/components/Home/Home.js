@@ -3,6 +3,7 @@ import Banner from './Banner';
 import BestSellers from './BestSellers';
 import DownloadApp from './DownloadApp';
 import Newsletter from './Newsletter';
+import Reviews from './Reviews';
 import Summery from './Summery';
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
             <BestSellers></BestSellers>
             <DownloadApp></DownloadApp>
             <Summery></Summery>
+            <Reviews></Reviews>
             <Newsletter></Newsletter>
         </div>
     );
