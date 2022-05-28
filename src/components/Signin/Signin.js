@@ -13,12 +13,12 @@ const Signin = () => {
     const [userInfo, setUserInfo] = useState({
         email: "",
         password: "",
-    })
+    });
     const [errors, setErrors] = useState({
         email: "",
         password: "",
         general: "",
-    })
+    });
 
     const [signInWithEmail, user, loading, hookError] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, googleUser, loadingGoogle, googleError] = useSignInWithGoogle(auth);
@@ -57,6 +57,26 @@ const Signin = () => {
     const handleGoogle = () => {
         signInWithGoogle();
     }
+
+    const handleAddUser = (newUser) => {
+        axios.put("https://wood-peckers.herokuapp.com/users", newUser)
+            .then(res => {
+                //console.log(res.data);
+            });
+    };
+
+    useEffect(() => {
+        const newUser = {
+            name: googleUser?.user?.displayName,
+            email: googleUser?.user?.email,
+            location: "Dhaka, Bangldesh",
+            img: googleUser?.user?.photoURL
+        };
+        if (newUser.name !== "") {
+            handleAddUser(newUser);
+            console.log(newUser);
+        }
+    }, [googleUser]);
 
     const handleResetPassword = () => {
         if (userInfo.email !== "") {

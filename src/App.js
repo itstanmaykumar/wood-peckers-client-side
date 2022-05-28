@@ -1,8 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from "./components/Dashboard/Dashboard";
+import MyProfile from "./components/Dashboard/MyProfile";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import ProductDetails from "./components/Products/ProductDetails";
 import Products from "./components/Products/Products";
 import Footer from "./components/Shared/Footer";
 import Navbar from "./components/Shared/Navbar";
@@ -18,6 +22,21 @@ function App() {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="/products" element={<Products></Products>}></Route>
+        <Route path="/products/:productId" element={
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        }></Route>
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        }></Route>
+        <Route path="/dashboard/editprofile" element={
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        }></Route>
         <Route path="/signin" element={<Signin></Signin>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>

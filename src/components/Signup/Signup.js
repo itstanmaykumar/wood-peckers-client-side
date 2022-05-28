@@ -17,7 +17,8 @@ const Signup = () => {
     const [userData, setUserData] = useState({
         name: "",
         email: "",
-        password: "",
+        location: "Dhaka, Bangladesh",
+        img: "https://i.ibb.co/5sQ7jQp/demouser-01.png",
     });
     const [errors, setErrors] = useState({
         email: "",
@@ -31,12 +32,17 @@ const Signup = () => {
 
     const [signInWithGoogle, googleUser, loadingGoogle, googleError] = useSignInWithGoogle(auth);
 
+    const handleNameChange = (e) => {
+        setUserData({ ...userData, name: e.target.value });
+    };
+
     const handleEmailChange = (e) => {
         const emailRegex = /\S+@\S+\.\S+/;
         const validEmail = emailRegex.test(e.target.value);
 
         if (validEmail) {
             setUserInfo({ ...userInfo, email: e.target.value });
+            setUserData({ ...userData, email: e.target.value });
             setErrors({ ...errors, email: "" });
         } else {
             setErrors({ ...errors, email: "Invalid email" });
@@ -45,9 +51,6 @@ const Signup = () => {
 
     };
 
-    const handleNameChange = (e) => {
-        const userName = e.target.value;
-    };
     const handlePasswordChange = (e) => {
         const passwordRegex = /.{6,}/;
         const validPassword = passwordRegex.test(e.target.value);
@@ -61,14 +64,35 @@ const Signup = () => {
         }
     };
 
+    const handleAddUser = (newUser) => {
+        axios.put("https://wood-peckers.herokuapp.com/users", newUser)
+            .then(res => {
+                //console.log(res.data);
+            });
+    };
+
     const handleSignup = (e) => {
         e.preventDefault();
         createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+        handleAddUser(userData);
     };
 
     const handleGoogle = () => {
         signInWithGoogle();
-    }
+    };
+
+    useEffect(() => {
+        const newUser = {
+            name: googleUser?.user?.displayName,
+            email: googleUser?.user?.email,
+            location: "Dhaka, Bangldesh",
+            img: googleUser?.user?.photoURL
+        };
+        if (newUser.name !== "") {
+            handleAddUser(newUser);
+            console.log(newUser);
+        }
+    }, [googleUser]);
 
     useEffect(() => {
         const error = hookError || googleError;
@@ -97,7 +121,6 @@ const Signup = () => {
 
     if (googleUser || user) {
         const admin = googleUser || user;
-        console.log(admin);
         getToken(admin);
     }
 
@@ -106,7 +129,6 @@ const Signup = () => {
     const from = location.state?.from?.pathname || "/home";
 
     useEffect(() => {
-        //console.log(googleUser);
         if (user || googleUser) {
             navigate(from, { replace: true });
         }

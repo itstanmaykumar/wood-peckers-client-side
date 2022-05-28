@@ -12,7 +12,7 @@ const SingleReview = (props) => {
                 <p className="">"{text}"</p>
                 <div className="row mt-4">
                     <div className="mx-auto col-lg-3 col-md-4">
-                        <img className="w-100" src={img} alt="r img" />
+                        <img className="w-100 rounded-circle" src={img} alt="r img" />
                     </div>
                     <div className='col-md-8 d-flex flex-column justify-content-center'>
                         <small className='fw-bolder fs-6'>{name}</small>
