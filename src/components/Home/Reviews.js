@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';// Import Swiper React components
+import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useReviews from '../../hooks/useReviews';

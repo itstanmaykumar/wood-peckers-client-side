@@ -37,18 +37,11 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-lg-0">
-                        <li className="nav-item me-2 btn p-0">
-                            <span className="nav-link">
-                                {
-                                    user?.uid && (<span>Hi {user?.displayName?.slice(0, user?.displayName?.indexOf(" "))},</span>)
-                                }
-                            </span>
-                        </li>
                         <li className="nav-item me-2">
                             <Link className="nav-link" to="/home">Home</Link>
                         </li>
                         <li className="nav-item me-2">
-                            <Link className="nav-link" to="/posters">Gallery</Link>
+                            <Link className="nav-link" to="/products">Products</Link>
                         </li>
                         <li className="nav-item me-2">
                             <Link className="nav-link" to="/blogs">Blogs</Link>
