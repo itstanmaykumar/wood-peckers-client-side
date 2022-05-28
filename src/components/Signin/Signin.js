@@ -74,7 +74,7 @@ const Signin = () => {
         };
         if (newUser.name !== "") {
             handleAddUser(newUser);
-            console.log(newUser);
+            //console.log(newUser);
         }
     }, [googleUser]);
 
@@ -113,7 +113,7 @@ const Signin = () => {
         if (email) {
             const { data } = await axios.post('https://wood-peckers.herokuapp.com/signin', { email });
             localStorage.setItem('accessToken', data.accessToken);
-            //console.log(localStorage);
+            console.log(localStorage);
         }
     };
 
