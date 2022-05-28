@@ -89,7 +89,7 @@ const Signin = () => {
     useEffect(() => {
         const error = hookError || googleError;
         if (error) {
-            //console.log(error?.code);
+            console.log(error?.code);
             switch (error?.code) {
                 case "auth/wrong-password":
                     toast.error("Wrong password. Intruder!!")
@@ -113,7 +113,7 @@ const Signin = () => {
         if (email) {
             const { data } = await axios.post('https://wood-peckers.herokuapp.com/signin', { email });
             localStorage.setItem('accessToken', data.accessToken);
-            console.log(localStorage);
+            //console.log(localStorage);
         }
     };
 

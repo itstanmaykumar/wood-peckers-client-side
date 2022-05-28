@@ -64,8 +64,8 @@ const Signup = () => {
         }
     };
 
-    const handleAddUser = (newUser) => {
-        axios.put("https://wood-peckers.herokuapp.com/users", newUser)
+    const handleAddUser = async (newUser) => {
+        await axios.put("https://wood-peckers.herokuapp.com/users", newUser)
             .then(res => {
                 //console.log(res.data);
             });

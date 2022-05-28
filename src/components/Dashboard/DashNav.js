@@ -3,9 +3,11 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.init';
+import useUser from '../../hooks/useUser';
 
 const DashNav = () => {
-    const [user, loading] = useAuthState(auth);
+    const [authUser, loading] = useAuthState(auth);
+    const [user, setUser] = useUser(authUser.email);
 
     const handleSignout = () => {
         signOut(auth).then(() => {
@@ -20,7 +22,7 @@ const DashNav = () => {
             <div className="my-3 shadow-lg bg-dark-pro rounded-10 p-4">
                 <Link className="btn btn-main text-start d-lg-block mt-2 mb-4 me-4" to="/dashboard">My Profile</Link>
                 {
-                    user?.email ?
+                    user?.role ?
                         (
                             <span className='d-block'>
                                 <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/editprofile">Edit Profile</Link>

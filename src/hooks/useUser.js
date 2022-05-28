@@ -8,7 +8,7 @@ const useUser = (email) => {
         axiosPrivate.get(`https://wood-peckers.herokuapp.com/users/${email}`)
             .then(res => {
                 setUser(res.data);
-                console.log(res.data);
+                //console.log(res.data);
             })
     }, [email]);
     return [user, setUser]

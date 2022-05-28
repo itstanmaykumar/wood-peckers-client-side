@@ -25,7 +25,7 @@ const ProductItem = ({ product }) => {
                             </small>
                         </div>
                         <div className='pt-2 px-3'>
-                            <small className='text-secondary text-ss'>{text.slice(0, 55)}...<span /*onClick={() => handleCourseDetails(id)}*/ className="fw-bolder cursor-pointer">Read more</span></small>
+                            <small className='text-secondary text-ss'>{text.slice(0, 55)}...<span onClick={() => handleProductDetails(_id)} className="fw-bolder cursor-pointer">Read more</span></small>
                         </div>
                     </div>
                     <div className="pb-3 text-center">
