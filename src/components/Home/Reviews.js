@@ -7,7 +7,7 @@ import Slider from 'react-slick/lib/slider';
 
 const Reviews = () => {
 
-    const [reviews, setReviews] = useReviews();
+    const [reviews] = useReviews();
     const totalReviews = reviews.length;
     let filteredReviews = reviews.slice(totalReviews - 3, totalReviews);
     filteredReviews = filteredReviews.reverse();
@@ -17,12 +17,11 @@ const Reviews = () => {
         dots: true,
         centerMode: true,
         infinite: true,
-        centerPadding: "60px",
         slidesToShow: 1,
-        slidesToScroll: 1,
+        slidesToScroll: 0,
         autoplay: true,
-        speed: 500,
-        autoplaySpeed: 2000,
+        speed: 300,
+        autoplaySpeed: 1500,
         cssEase: "linear"
     };
 

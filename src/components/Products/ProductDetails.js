@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,21 +11,21 @@ const ProductDetails = () => {
     const { productId } = useParams();
     const navigate = useNavigate();
 
-    const [authUser, loading] = useAuthState(auth);
-    const [user, setUser] = useUser(authUser.email);
+    const [authUser] = useAuthState(auth);
+    const [user] = useUser(authUser.email);
 
-    let [product, setProduct] = useProduct(productId);
+    let [product] = useProduct(productId);
 
     const handleOrder = (e) => {
         e.preventDefault();
         const orderQuantity = parseInt(e.target.quantity.value);
         let newOrder = {
             pid: product._id,
-            name: product.title,
+            title: product.name,
             quantity: orderQuantity,
             total: orderQuantity * parseFloat(product.price),
-            pstatus: false,
-            dstatus: false,
+            pstatus: "Pending",
+            dstatus: "Pending",
             email: user.email,
             name: user.name,
             phone: e.target.phone.value,
@@ -37,7 +37,7 @@ const ProductDetails = () => {
             .then(res => {
                 //console.log(res.data);
                 toast.success("Your order has been placed.");
-                navigate('/myorders');
+                navigate('/dashboard/myorders');
             });
     }
 
@@ -49,7 +49,7 @@ const ProductDetails = () => {
                         <img className='d-block w-75 mx-auto rounded-20 shadow' src={product.img}></img>
                     </div>
                     <div className='col-md-6'>
-                        <h1 className='my-3 fw-bolder'>{product.title}</h1>
+                        <h1 className='my-3 fw-bolder'>{product.name}</h1>
                         <p>{product.text}</p>
                         <p className='fs-5'><span className='fw-bolder'>Price: </span>${product.price}</p>
                         <div className='py-1'>

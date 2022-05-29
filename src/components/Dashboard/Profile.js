@@ -1,17 +1,16 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.init';
 import useUser from '../../hooks/useUser';
 
 const Profile = () => {
 
-    const [authUser, loading] = useAuthState(auth);
+    const [authUser] = useAuthState(auth);
 
-    const [user, setUser] = useUser(authUser.email);
+    const [user] = useUser(authUser.email);
     //console.log(user);
     return (
-        <div className="col-lg-8">
+        <div className="col-lg-9">
             <div className="my-3 py-2 bg-dark-pro container rounded-10 text-white">
                 <p className="text-main text-center mt-5">You are now logged in as</p>
                 {

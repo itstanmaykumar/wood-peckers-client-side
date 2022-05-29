@@ -6,8 +6,8 @@ import { auth } from '../../firebase.init';
 import useUser from '../../hooks/useUser';
 
 const DashNav = () => {
-    const [authUser, loading] = useAuthState(auth);
-    const [user, setUser] = useUser(authUser.email);
+    const [authUser] = useAuthState(auth);
+    const [user] = useUser(authUser.email);
 
     const handleSignout = () => {
         signOut(auth).then(() => {
@@ -18,7 +18,7 @@ const DashNav = () => {
     }
 
     return (
-        <div className="col-lg-4">
+        <div className="col-lg-3">
             <div className="my-3 shadow-lg bg-dark-pro rounded-10 p-4">
                 <Link className="btn btn-main text-start d-lg-block mt-2 mb-4 me-4" to="/dashboard">My Profile</Link>
                 {
@@ -36,9 +36,9 @@ const DashNav = () => {
                         (
                             <span>
                                 <Link className="btn btn-main text-start d-lg-block mt-2 mb-3 me-4" to="/dashboard/editprofile">Edit Profile</Link>
-                                <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/myorders">My Orders</Link>
+                                <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/myorders">My Orders</Link>
                                 <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/pay">Pay</Link>
-                                <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/review">Review</Link>
+                                <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/addreview">Add Review</Link>
                             </span>
                         )
                 }

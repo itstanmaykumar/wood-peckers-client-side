@@ -10,7 +10,7 @@ import DashNav from './DashNav';
 const MyProfile = () => {
 
     const [authUser, loading] = useAuthState(auth);
-    const [user, setUser] = useUser(authUser.email);
+    const [user] = useUser(authUser.email);
     let navigate = useNavigate();
 
     const handleUpdateProfile = (e) => {
@@ -48,7 +48,7 @@ const MyProfile = () => {
                             <span className="visually-hidden"> Loading...</span>
                         </div>
                     ) : (
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <div className="my-3 py-2 bg-dark-pro container rounded-10 text-white">
                                 <form onSubmit={handleUpdateProfile} className="px-5 pt-3 pb-5 bg-dark-pro rounded-10 shadow-lg text-main">
                                     <h3 className="mt-4 mb-0 text-main">Edit Your Profile</h3>
@@ -71,7 +71,7 @@ const MyProfile = () => {
                                     </div>
                                     <div className="my-4">
                                         <label htmlFor="bio" className="form-label">Edit Bio</label>
-                                        <textarea type="text" className="form-control" name="bio" defaultValue={user.bio} />
+                                        <textarea type="text" rows="5" className="form-control" name="bio" defaultValue={user.bio} />
                                     </div>
                                     <div className="my-4">
                                         <label htmlFor="profession" className="form-label">Profession</label>

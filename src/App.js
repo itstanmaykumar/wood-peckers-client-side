@@ -3,6 +3,8 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./components/Dashboard/Dashboard";
 import MyProfile from "./components/Dashboard/MyProfile";
+import AddReview from "./components/Dashboard/UserDash/AddReview";
+import MyOrders from "./components/Dashboard/UserDash/MyOrders";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -16,7 +18,7 @@ import Signup from "./components/Signup/Signup";
 
 function App() {
   return (
-    <div>
+    <div className="of-x-h">
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
@@ -35,6 +37,16 @@ function App() {
         <Route path="/dashboard/editprofile" element={
           <PrivateRoute>
             <MyProfile></MyProfile>
+          </PrivateRoute>
+        }></Route>
+        <Route path="/dashboard/myorders" element={
+          <PrivateRoute>
+            <MyOrders></MyOrders>
+          </PrivateRoute>
+        }></Route>
+        <Route path="/dashboard/addreview" element={
+          <PrivateRoute>
+            <AddReview></AddReview>
           </PrivateRoute>
         }></Route>
         <Route path="/signin" element={<Signin></Signin>}></Route>
