@@ -37,8 +37,19 @@ const ProductDetails = () => {
             .then(res => {
                 //console.log(res.data);
                 toast.success("Your order has been placed.");
-                navigate('/dashboard/myorders');
             });
+
+        const updatedQuantity = parseInt(product.stock) - orderQuantity;
+        const updatedProduct = {
+            id: product._id,
+            stock: updatedQuantity
+        };
+        //console.log(updatedProduct);
+        axios.put("https://wood-peckers.herokuapp.com/products", updatedProduct)
+            .then(res => {
+                //console.log(res.data);
+            });
+        navigate('/dashboard/myorders');
     }
 
     return (

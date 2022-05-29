@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import AdminRoute from "./components/AdminRoute/AdminRoute";
+import ManageOrders from "./components/Dashboard/AdminDash/ManageOrders";
 import Dashboard from "./components/Dashboard/Dashboard";
 import MyProfile from "./components/Dashboard/MyProfile";
 import AddReview from "./components/Dashboard/UserDash/AddReview";
@@ -48,6 +50,11 @@ function App() {
           <PrivateRoute>
             <AddReview></AddReview>
           </PrivateRoute>
+        }></Route>
+        <Route path="/dashboard/manageorders" element={
+          <AdminRoute>
+            <ManageOrders></ManageOrders>
+          </AdminRoute>
         }></Route>
         <Route path="/signin" element={<Signin></Signin>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>

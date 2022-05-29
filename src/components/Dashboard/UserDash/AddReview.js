@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axiosPrivate from '../../../api/axiosPrivate';
 import { auth } from '../../../firebase.init';
 import useReviews from '../../../hooks/useReviews';
 import useUser from '../../../hooks/useUser';
@@ -29,11 +29,11 @@ const AddReview = () => {
             title: e.target.title.value,
             text: e.target.text.value
         };
-        console.log(newReview);
+        //console.log(newReview);
 
-        axios.post("https://wood-peckers.herokuapp.com/reviews", newReview)
+        axiosPrivate.post("https://wood-peckers.herokuapp.com/reviews", newReview)
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
                 if (res.data.acknowledged) {
                     toast.success("Feedback is recorded.");
                 }

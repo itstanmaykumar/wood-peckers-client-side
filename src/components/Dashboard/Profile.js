@@ -6,7 +6,6 @@ import useUser from '../../hooks/useUser';
 const Profile = () => {
 
     const [authUser] = useAuthState(auth);
-
     const [user] = useUser(authUser.email);
     //console.log(user);
     return (

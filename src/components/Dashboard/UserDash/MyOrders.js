@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axiosPrivate from '../../../api/axiosPrivate';
 import { auth } from '../../../firebase.init';
@@ -50,10 +48,10 @@ const MyOrders = () => {
                                             <h5 className='fw-bolder'>{order.title}</h5>
                                             <p>Total: <span className='text-main'>${parseInt(order.total)}</span></p>
                                             <p>Status: <span className='text-main'>{order.dstatus}</span></p>
-                                            <p>Payment: <span className='text-main'>{order.pstatus}</span></p>
+                                            <p>Payment: <span className='text-warning'>{order.pstatus}</span></p>
                                             {
                                                 order.txtid !== "" ? (
-                                                    <p>TrxId: <span className='text-main'>{order.txtid}</span></p>
+                                                    <p>TrxId: <span className='text-warning'>{order.txtid}</span></p>
                                                 ) : (
                                                     <span></span>
                                                 )
