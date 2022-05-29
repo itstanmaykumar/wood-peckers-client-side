@@ -34,9 +34,9 @@ const DashNav = () => {
                                 <span className='d-block'>
                                     <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/editprofile">Edit Profile</Link>
                                     <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/manageorders">Manage Orders</Link>
-                                    <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/allpaintings">Manage Products</Link>
-                                    <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/addpainting">Add Product</Link>
-                                    <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/mkadmin">Make Admin</Link>
+                                    <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/manageproducts">Manage Products</Link>
+                                    <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/addproduct">Add Product</Link>
+                                    <Link className="btn btn-main text-start d-lg-block my-3 me-4" to="/dashboard/mkadmin">Make Admin</Link>
                                 </span>
                             )
                             :

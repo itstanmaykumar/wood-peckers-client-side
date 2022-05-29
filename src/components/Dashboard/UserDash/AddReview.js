@@ -76,7 +76,7 @@ const AddReview = () => {
                                         <label htmlFor="text" className="form-label">Your Feedback</label>
                                         <textarea type="text" rows="5" className="form-control" name="text" required />
                                     </div>
-                                    <button type="submit" className="mt-4 btn btn-main box">Update Profile</button>
+                                    <button type="submit" className="mt-4 btn btn-main box">Submit</button>
                                 </form>
                             </div>
                         </div >

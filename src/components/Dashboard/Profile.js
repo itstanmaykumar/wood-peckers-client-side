@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.init';
 import useUser from '../../hooks/useUser';
 
@@ -42,6 +43,9 @@ const Profile = () => {
                             {
                                 user.linkedIn && <p><span className='text-main fw-bolder pe-2'>LinkedIn:</span> <a className='text-white' href={user.linkedIn} target="_blank">{user.linkedIn}</a></p>
                             }
+                            <div className='text-center mt-4'>
+                                <Link className="btn btn-outline-main text-start my-3 me-4" to="/dashboard/editprofile">Edit Profile</Link>
+                            </div>
                         </div>
                     ) : (
                         <div className='d-flex my-5 text-main justify-content-center'>

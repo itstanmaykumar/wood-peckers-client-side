@@ -76,7 +76,7 @@ const ProductDetails = () => {
                     <form onSubmit={handleOrder} className="mt-3">
                         <div className="my-4">
                             <label htmlFor="quantity" className="form-label">Order Quantity</label>
-                            <input type="number" min={product?.minOrder} max={product?.stock} className="form-control" name="quantity" required />
+                            <input type="number" min={product?.minOrder} max={product?.stock} className="form-control" name="quantity" defaultValue={product?.minOrder} required />
                         </div>
                         <div className="my-4">
                             <label htmlFor="name" className="form-label">Your Name</label>

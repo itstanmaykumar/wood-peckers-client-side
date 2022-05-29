@@ -37,17 +37,14 @@ const ManageOrders = () => {
     }
 
     const handleDeleteOrder = (orderId) => {
-        const proceed = window.confirm("Are you sure , you want to delete this order?");
-        if (proceed) {
-            axios.delete(`https://wood-peckers.herokuapp.com/orders/${orderId}`)
-                .then(res => {
-                    if (res.data.deletedCount) {
-                        toast.warn("Order is Cancelled.");
-                        const remainingorders = orders.filter(order => order._id !== orderId);
-                        setOrders(remainingorders);
-                    }
-                })
-        }
+        axios.delete(`https://wood-peckers.herokuapp.com/orders/${orderId}`)
+            .then(res => {
+                if (res.data.deletedCount) {
+                    toast.warn("Order is Cancelled.");
+                    const remainingorders = orders.filter(order => order._id !== orderId);
+                    setOrders(remainingorders);
+                }
+            })
     };
 
     return (
@@ -56,7 +53,7 @@ const ManageOrders = () => {
                 <DashNav></DashNav>
                 <div className="col-lg-9">
                     <div className="my-3 py-2 bg-dark-pro rounded-10 text-white">
-                        <h3 className='text-center text-main mt-4'>My Orders</h3>
+                        <h3 className='text-center text-main mt-4'>Manage Orders</h3>
 
                         <div className="pt-2 table-responsive">
                             {
@@ -103,7 +100,25 @@ const ManageOrders = () => {
                                                                 order.pstatus === "Paid" ? (
                                                                     <td className="pointer">-</td>
                                                                 ) : (
-                                                                    <td onClick={() => handleDeleteOrder(order._id)} className="pointer ico text-danger">Delete</td>
+                                                                    <td>
+                                                                        <button className="btn text-danger p-0" data-bs-toggle="modal" data-bs-target="#confirmationModal">Delete</button>
+                                                                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog text-dark">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h4 class="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <h5>Are you sure, you want to delete this order?</h5>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button onClick={() => handleDeleteOrder(order._id)} type="button" class="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
                                                                 )
                                                             }
                                                         </tr>

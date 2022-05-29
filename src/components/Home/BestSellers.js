@@ -6,7 +6,8 @@ import ProductItem from '../Products/ProductItem';
 const BestSellers = () => {
     const [products, setProducts] = useProducts();
 
-    const bestSeller = products.slice(0, 3);
+    const length = products.length;
+    const bestSeller = products.slice(length - 3, length);
 
     return (
         <div className="container py-4">

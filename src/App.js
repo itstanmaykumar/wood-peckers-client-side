@@ -2,7 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import AdminRoute from "./components/AdminRoute/AdminRoute";
+import AddProduct from "./components/Dashboard/AdminDash/AddProduct";
+import MakeAdmin from "./components/Dashboard/AdminDash/MakeAdmin";
 import ManageOrders from "./components/Dashboard/AdminDash/ManageOrders";
+import ManageProducts from "./components/Dashboard/AdminDash/ManageProducts";
 import Dashboard from "./components/Dashboard/Dashboard";
 import MyProfile from "./components/Dashboard/MyProfile";
 import AddReview from "./components/Dashboard/UserDash/AddReview";
@@ -54,6 +57,21 @@ function App() {
         <Route path="/dashboard/manageorders" element={
           <AdminRoute>
             <ManageOrders></ManageOrders>
+          </AdminRoute>
+        }></Route>
+        <Route path="/dashboard/manageproducts" element={
+          <AdminRoute>
+            <ManageProducts></ManageProducts>
+          </AdminRoute>
+        }></Route>
+        <Route path="/dashboard/addproduct" element={
+          <AdminRoute>
+            <AddProduct></AddProduct>
+          </AdminRoute>
+        }></Route>
+        <Route path="/dashboard/mkadmin" element={
+          <AdminRoute>
+            <MakeAdmin></MakeAdmin>
           </AdminRoute>
         }></Route>
         <Route path="/signin" element={<Signin></Signin>}></Route>

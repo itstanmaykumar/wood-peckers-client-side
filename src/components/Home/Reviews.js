@@ -9,7 +9,8 @@ const Reviews = () => {
 
     const [reviews] = useReviews();
     const totalReviews = reviews.length;
-    let filteredReviews = reviews.slice(totalReviews - 3, totalReviews);
+    // let filteredReviews = reviews.slice(totalReviews - 3, totalReviews);
+    let filteredReviews = reviews.slice(0, totalReviews);
     filteredReviews = filteredReviews.reverse();
 
     const settings = {

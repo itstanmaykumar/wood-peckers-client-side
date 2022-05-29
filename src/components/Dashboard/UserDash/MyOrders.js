@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axiosPrivate from '../../../api/axiosPrivate';
 import { auth } from '../../../firebase.init';
@@ -9,28 +10,45 @@ import DashNav from '../DashNav';
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
+
+
+    const getMyOrders = async () => {
+        const email = user?.email;
+        const { data } = await axiosPrivate.get(`https://wood-peckers.herokuapp.com/myorders?user=${email}`);
+        setOrders(data);
+    }
 
     useEffect(() => {
-        const getMyOrders = async () => {
-            const email = user?.email;
-            const { data } = await axiosPrivate.get(`https://wood-peckers.herokuapp.com/myorders?user=${email}`);
-            setOrders(data);
-        }
         getMyOrders();
     }, [user]);
 
+    const handlePayment = (orderId) => {
+        const genTransactionId = [...Array(12)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+        //console.log(genTransactionId);
+        const updatedOrder = {
+            id: orderId,
+            pstatus: "Paid",
+            txtid: genTransactionId
+        };
+        axiosPrivate.put("https://wood-peckers.herokuapp.com/orders", updatedOrder)
+            .then(res => {
+                //console.log(res.data);
+                getMyOrders();
+                toast.success("Payment Sucessful.");
+            });
+    }
+
+
     const handleCancelOrder = (orderId) => {
-        const proceed = window.confirm("Are you sure , you want to cancel this order?");
-        if (proceed) {
-            axios.delete(`https://wood-peckers.herokuapp.com/orders/${orderId}`)
-                .then(res => {
-                    if (res.data.deletedCount) {
-                        toast.warn("Order is Cancelled.");
-                        const remainingorders = orders.filter(order => order._id !== orderId);
-                        setOrders(remainingorders);
-                    }
-                })
-        }
+        axios.delete(`https://wood-peckers.herokuapp.com/orders/${orderId}`)
+            .then(res => {
+                if (res.data.deletedCount) {
+                    toast.warn("Order is Cancelled.");
+                    const remainingorders = orders.filter(order => order._id !== orderId);
+                    setOrders(remainingorders);
+                }
+            })
     };
 
     return (
@@ -48,10 +66,10 @@ const MyOrders = () => {
                                             <h5 className='fw-bolder'>{order.title}</h5>
                                             <p>Total: <span className='text-main'>${parseInt(order.total)}</span></p>
                                             <p>Status: <span className='text-main'>{order.dstatus}</span></p>
-                                            <p>Payment: <span className='text-warning'>{order.pstatus}</span></p>
+                                            <p>Payment: <span className='text-warning fw-bold'>{order.pstatus}</span></p>
                                             {
                                                 order.txtid !== "" ? (
-                                                    <p>TrxId: <span className='text-warning'>{order.txtid}</span></p>
+                                                    <p>TrxId: <span className='text-warning fw-bold'>{order.txtid}</span></p>
                                                 ) : (
                                                     <span></span>
                                                 )
@@ -61,8 +79,25 @@ const MyOrders = () => {
                                                     <button className="btn btn-secondary disabled d-block w-100">Cancel</button>
                                                 ) : (
                                                     <span className='d-block'>
-                                                        <button className="btn btn-warning d-block w-100 mb-2">Pay Now</button>
-                                                        <button onClick={() => handleCancelOrder(order._id)} className="btn btn-main d-block w-100">Cancel</button>
+                                                        <button onClick={() => handlePayment(order._id)} className="btn btn-warning d-block w-100 mb-2">Pay Now</button>
+                                                        <button className="btn btn-main d-block w-100" data-bs-toggle="modal" data-bs-target="#confirmationModal">Cancel</button>
+
+                                                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h5>Are you sure, you want to cancel this order?</h5>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button onClick={() => handleCancelOrder(order._id)} type="button" class="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </span>
                                                 )
                                             }
