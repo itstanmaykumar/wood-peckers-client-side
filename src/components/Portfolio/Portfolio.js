@@ -1,5 +1,10 @@
+import { faArrowRight, faFileDownload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import propic from '../../media/me.jpg';
+import hashtag from '../../media/hashtagss.JPG';
+import wood from '../../media/wood.JPG';
+import cinefest from '../../media/cines-festss.JPG';
 
 const Portfolio = () => {
     return (
@@ -14,7 +19,49 @@ const Portfolio = () => {
                     <p className='mb-4'>
                         A full stack web developer based in Dhaka, Bangladesh. I enjoy creating things that live on the internet, whether that be websites, applications, or anything in between. Shortly after graduating from National University of Bangaldesh with a BSc. in Computer Science & Engineering, I started freelancing where I work on a wide variety of interesting and meaningful projects on a daily basis.
                     </p>
-                    <a className='btn btn-outline-dark shadow' href='https://drive.google.com/file/d/1ooOsCEIZD8JJOvnQ4MsFoWNQO2tmusdX/view?usp=sharing' target="_blank">Download Resume <i className="ps-2 fas fa-download"></i></a>
+                    <a className='btn btn-outline-dark shadow' href='https://drive.google.com/file/d/1ooOsCEIZD8JJOvnQ4MsFoWNQO2tmusdX/view?usp=sharing' target="_blank">Download Resume <FontAwesomeIcon className='ps-2' icon={faFileDownload} /></a>
+                </div>
+            </section>
+            <section className='py-3 mb-5'>
+                <h2 className='my-4 text-center'>My Recent Projects</h2>
+                <div className="col-lg-10 row mx-auto d-flex justify-content-between align-items-center">
+                    <div className="col-lg-6 col-md-9 px-4 py-lg-4 my-4 mx-auto">
+                        <a href="https://hashtag-school.web.app/" target="_blank">
+                            <img className='w-100 rounded-10 shadow-lg' src={hashtag} alt="hashtag live" />
+                        </a>
+                    </div>
+                    <div className="col-lg-6 col-md-9 pb-4 px-4 py-lg-4 my-4 mx-auto">
+                        <p className='mb-lg-5'>
+                            Hashtag is a for-profit massive open online course provider aimed at professional adults and students. Her, students take courses primarily to improve job-related skills.
+                        </p>
+                        <a className='btn btn-outline-dark shadow px-4 fw-bold' href="https://hashtag-school.web.app/" target="_blank">Live Site <FontAwesomeIcon className='ps-2' icon={faArrowRight} /></a>
+                    </div>
+                </div>
+                <div className="col-lg-10 row mx-auto d-flex justify-content-between align-items-center">
+                    <div className="col-lg-6 col-md-9 px-4 py-lg-4 my-4 mx-auto order-lg-1">
+                        <a href="https://wood-peckers.web.app/" target="_blank">
+                            <img className='w-100 rounded-10 shadow-lg' src={wood} alt="wood peckers live" />
+                        </a>
+                    </div>
+                    <div className="col-lg-6 col-md-9 pb-4 px-4 py-lg-4 my-4 mx-auto order-lg-0">
+                        <p className='mb-lg-4'>
+                            Woodpeckers, Inc.provides great deals on our huge collection of The Finest Sationary Products of Your Office Or Eductaional Institutions, with fast shipping, free returns, and in a budget friendly wholesell price.!
+                        </p>
+                        <a className='btn btn-outline-dark shadow px-4 fw-bold' href="https://wood-peckers.web.app/" target="_blank">Live Site <FontAwesomeIcon className='ps-2' icon={faArrowRight} /></a>
+                    </div>
+                </div>
+                <div className="col-lg-10 row mx-auto d-flex justify-content-around align-items-center">
+                    <div className="col-lg-6 col-md-9 px-4 py-lg-4 my-4 mx-auto">
+                        <a href="https://cinefest.netlify.app/" target="_blank">
+                            <img className='w-100 rounded-10 shadow-lg' src={cinefest} alt="cinefest live" />
+                        </a>
+                    </div>
+                    <div className="col-lg-6 col-md-9 pb-4 px-4 py-lg-4 my-4 mx-auto">
+                        <p className='mb-lg-4'>
+                            Cinefest is an online database of information related to films, television series – including cast, production crew and personal biographies, plot summaries, trivia, ratings, and fan and critical reviews.
+                        </p>
+                        <a className='btn btn-outline-dark shadow px-4 fw-bold' href="https://cinefest.netlify.app/" target="_blank">Live Site <FontAwesomeIcon className='ps-2' icon={faArrowRight} /></a>
+                    </div>
                 </div>
             </section>
             <section className="container px-5 pt-3 mb-5">
