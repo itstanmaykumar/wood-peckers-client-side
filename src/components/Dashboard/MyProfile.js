@@ -74,7 +74,7 @@ const MyProfile = () => {
                                         <textarea type="text" rows="5" className="form-control" name="bio" defaultValue={user.bio} />
                                     </div>
                                     <div className="my-4">
-                                        <label htmlFor="profession" className="form-label">Profession</label>
+                                        <label htmlFor="profession" className="form-label">Profession/Education</label>
                                         <input type="text" className="form-control" name="profession" defaultValue={user.profession} />
                                     </div>
                                     <div className="my-4">

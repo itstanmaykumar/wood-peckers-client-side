@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axiosPrivate from '../../api/axiosPrivate';
 import { auth } from '../../firebase.init';
@@ -16,6 +16,17 @@ const ProductDetails = () => {
     const [user] = useUser(authUser.email);
 
     let [product] = useProduct(productId);
+
+    const [qunatityError, setQunatityError] = useState(false);
+
+    const handleMinOrder = (e) => {
+        const currentOrder = e.target.value;
+        if (currentOrder < product.minOrder) {
+            setQunatityError(true);
+        } else {
+            setQunatityError(false);
+        }
+    }
 
     const handleOrder = (e) => {
         e.preventDefault();
@@ -78,7 +89,10 @@ const ProductDetails = () => {
                     <form onSubmit={handleOrder} className="mt-3">
                         <div className="my-4">
                             <label htmlFor="quantity" className="form-label">Order Quantity</label>
-                            <input type="number" min={product?.minOrder} max={product?.stock} className="form-control" name="quantity" defaultValue={product?.minOrder} required />
+                            <input onChange={handleMinOrder} type="number" min={product?.minOrder} max={product?.stock} className="form-control" name="quantity" defaultValue={product?.minOrder} required />
+                            {
+                                qunatityError && <small className='text-danger text-ss'>Less than minimum order quantity.</small>
+                            }
                         </div>
                         <div className="my-4">
                             <label htmlFor="name" className="form-label">Your Name</label>
@@ -96,7 +110,7 @@ const ProductDetails = () => {
                             <label htmlFor="location" className="form-label">Delivery Address</label>
                             <input type="text" className="form-control" name="location" defaultValue={user.location} required />
                         </div>
-                        <button type='submit' className='mt-3 btn btn-dark d-inline-block'>Place Order <i className="ps-1 fas fa-angle-double-right"></i></button>
+                        <button type='submit' className='mt-3 btn btn-dark d-inline-block' disabled={qunatityError}>Place Order <i className="ps-1 fas fa-angle-double-right"></i></button>
                     </form>
                 </div>
             </div>
