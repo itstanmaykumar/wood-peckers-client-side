@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axiosPrivate from '../../../api/axiosPrivate';
 import { auth } from '../../../firebase.init';
@@ -9,6 +9,7 @@ import DashNav from '../DashNav';
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
 
     const getMyOrders = async () => {
         const email = user?.email;
@@ -20,32 +21,30 @@ const MyOrders = () => {
         getMyOrders();
     }, [user]);
 
-    const handlePayment = (orderId) => {
-        const genTransactionId = [...Array(12)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
-        //console.log(genTransactionId);
-        const updatedOrder = {
-            id: orderId,
-            pstatus: "Paid",
-            txtid: genTransactionId
-        };
-        axiosPrivate.put("https://wood-peckers.herokuapp.com/orders", updatedOrder)
-            .then(res => {
-                //console.log(res.data);
-                getMyOrders();
-                toast.success("Payment Sucessful.");
-            });
+    const handlePayment = (id) => {
+        navigate(`/dashboard/payment/${id}`);
     }
 
+    let confirmation = false;
+    let deleteId = "";
 
-    const handleCancelOrder = (orderId) => {
-        axios.delete(`https://wood-peckers.herokuapp.com/orders/${orderId}`)
-            .then(res => {
-                if (res.data.deletedCount) {
-                    toast.warn("Order is Cancelled.");
-                    const remainingorders = orders.filter(order => order._id !== orderId);
-                    setOrders(remainingorders);
-                }
-            })
+    const handleConfirmation = (id) => {
+        deleteId = id;
+        confirmation = true;
+        //console.log(confirmation);
+    }
+
+    const handleCancelOrder = () => {
+        if (confirmation) {
+            axiosPrivate.delete(`https://wood-peckers.herokuapp.com/orders/${deleteId}`)
+                .then(res => {
+                    if (res.data.deletedCount) {
+                        toast.warn("Order is Cancelled.");
+                        const remainingorders = orders.filter(order => order._id !== deleteId);
+                        setOrders(remainingorders);
+                    }
+                })
+        }
     };
 
     return (
@@ -63,10 +62,16 @@ const MyOrders = () => {
                                             <h5 className='fw-bolder'>{order.title}</h5>
                                             <p>Total: <span className='text-main'>${parseInt(order.total)}</span></p>
                                             <p>Status: <span className='text-main'>{order.dstatus}</span></p>
-                                            <p>Payment: <span className='text-warning fw-bold'>{order.pstatus}</span></p>
+                                            {
+                                                order.pstatus === "Pending" ? (
+                                                    <p>Payment: <span className='text-danger fw-bold'>{order.pstatus}</span></p>
+                                                ) : (
+                                                    <p>Payment: <span className='text-success fw-bold'>{order.pstatus}</span></p>
+                                                )
+                                            }
                                             {
                                                 order.txtid !== "" ? (
-                                                    <p>TrxId: <span className='text-warning fw-bold'>{order.txtid}</span></p>
+                                                    <p>Transaction Id: <span className='text-warning fw-bold text-ss of-x-h'>{order.txtid}</span></p>
                                                 ) : (
                                                     <span></span>
                                                 )
@@ -77,24 +82,7 @@ const MyOrders = () => {
                                                 ) : (
                                                     <span className='d-block'>
                                                         <button onClick={() => handlePayment(order._id)} className="btn btn-warning d-block w-100 mb-2">Pay Now</button>
-                                                        <button className="btn btn-main d-block w-100" data-bs-toggle="modal" data-bs-target="#confirmationModal">Cancel</button>
-
-                                                        <div className="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                                            <div className="modal-dialog">
-                                                                <div className="modal-content">
-                                                                    <div className="modal-header">
-                                                                        <h4 className="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
-                                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div className="modal-body">
-                                                                        <h5>Are you sure, you want to cancel this order?</h5>
-                                                                    </div>
-                                                                    <div className="modal-footer">
-                                                                        <button onClick={() => handleCancelOrder(order._id)} type="button" className="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <button onClick={() => handleConfirmation(order._id)} className="btn btn-main d-block w-100" data-bs-toggle="modal" data-bs-target="#confirmationModal">Cancel</button>
                                                     </span>
                                                 )
                                             }
@@ -102,6 +90,22 @@ const MyOrders = () => {
                                     </div>
                                 ))
                             }
+                            <div className="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body text-dark">
+                                            <h5>Are you sure, you want to cancel this order?</h5>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button onClick={() => handleCancelOrder()} type="button" className="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

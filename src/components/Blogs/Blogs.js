@@ -72,6 +72,12 @@ const Blogs = () => {
                         <p><span className='fw-bolder'>expectedProduct</span> contains your desired object.</p>
                     </div>
                 </article>
+                <article className="p-5 my-5 rounded-10 shadow-lg">
+                    <h3 className="mb-3">What is a unit test? Why should write unit tests?</h3>
+                    <div>
+                        <p>Unit testing is a type of software testing where individual units or software components are tested.Its purpose is to validate that each unit of code performs as expected.</p>
+                    </div>
+                </article>
             </div>
         </section>
     );

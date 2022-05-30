@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import MyProfile from "./components/Dashboard/MyProfile";
 import AddReview from "./components/Dashboard/UserDash/AddReview";
 import MyOrders from "./components/Dashboard/UserDash/MyOrders";
+import Payment from "./components/Dashboard/UserDash/Payment";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
 import Portfolio from "./components/Portfolio/Portfolio";
@@ -54,6 +55,11 @@ function App() {
         <Route path="/dashboard/addreview" element={
           <PrivateRoute>
             <AddReview></AddReview>
+          </PrivateRoute>
+        }></Route>
+        <Route path="/dashboard/payment/:id" element={
+          <PrivateRoute>
+            <Payment></Payment>
           </PrivateRoute>
         }></Route>
         <Route path="/dashboard/manageorders" element={

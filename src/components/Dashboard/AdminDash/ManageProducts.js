@@ -8,16 +8,27 @@ const ManageProducts = () => {
 
     const [products, setProducts] = useProducts();
 
-    const deleteProduct = (id) => {
-        console.log(id);
-        axiosPrivate.delete(`https://wood-peckers.herokuapp.com/products/${id}`)
-            .then(res => {
-                if (res.data.deletedCount) {
-                    toast.warn("Product is deleted.");
-                    const remainingProducts = products.filter(product => product._id !== id);
-                    setProducts(remainingProducts);
-                }
-            })
+    let confirmation = false;
+    let deleteId = "";
+
+    const handleConfirmation = (id) => {
+        deleteId = id;
+        confirmation = true;
+        //console.log(confirmation);
+    }
+
+    const deleteProduct = () => {
+        //console.log(deleteId);
+        if (confirmation) {
+            axiosPrivate.delete(`https://wood-peckers.herokuapp.com/products/${deleteId}`)
+                .then(res => {
+                    if (res.data.deletedCount) {
+                        toast.warn("Product is deleted.");
+                        const remainingProducts = products.filter(product => product._id !== deleteId);
+                        setProducts(remainingProducts);
+                    }
+                })
+        }
     };
 
     return (
@@ -52,32 +63,35 @@ const ManageProducts = () => {
                                                         <tr key={product._id}>
                                                             <td>{product.name}</td>
                                                             <td>{product.stock}</td>
-                                                            <td>
+                                                            <td onClick={() => handleConfirmation(product._id)}>
                                                                 <button className="btn text-danger p-0" data-bs-toggle="modal" data-bs-target="#confirmationModal">Delete</button>
-                                                                <div className="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                                                    <div className="modal-dialog text-dark">
-                                                                        <div className="modal-content">
-                                                                            <div className="modal-header">
-                                                                                <h4 className="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
-                                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div className="modal-body">
-                                                                                <h5>Are you sure, you want to delete this product?</h5>
-                                                                            </div>
-                                                                            <div className="modal-footer">
-                                                                                <button onClick={() => deleteProduct(product._id)} type="button" className="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+
                                                             </td>
+
                                                         </tr>
+
                                                     ))
                                                 }
                                             </tbody>
                                         </table>
                                     )
                             }
+                            <div className="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                <div className="modal-dialog text-dark">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <h5>Are you sure, you want to delete this product?</h5>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button onClick={() => deleteProduct()} type="button" className="btn btn-main" data-bs-dismiss="modal">Delete Product</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

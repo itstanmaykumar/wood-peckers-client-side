@@ -27,7 +27,7 @@ const ManageOrders = () => {
             };
             axiosPrivate.put("https://wood-peckers.herokuapp.com/orders", updatedOrder)
                 .then(res => {
-                    console.log(res.data);
+                    //console.log(res.data);
                     getOrders();
                     toast.success("Order is delivered!");
                 });
@@ -36,15 +36,26 @@ const ManageOrders = () => {
         }
     }
 
-    const handleDeleteOrder = (orderId) => {
-        axios.delete(`https://wood-peckers.herokuapp.com/orders/${orderId}`)
-            .then(res => {
-                if (res.data.deletedCount) {
-                    toast.warn("Order is Cancelled.");
-                    const remainingorders = orders.filter(order => order._id !== orderId);
-                    setOrders(remainingorders);
-                }
-            })
+    let confirmation = false;
+    let deleteId = "";
+
+    const handleConfirmation = (id) => {
+        deleteId = id;
+        confirmation = true;
+        //console.log(confirmation);
+    }
+
+    const handleDeleteOrder = () => {
+        if (confirmation) {
+            axiosPrivate.delete(`https://wood-peckers.herokuapp.com/orders/${deleteId}`)
+                .then(res => {
+                    if (res.data.deletedCount) {
+                        toast.warn("Order is Cancelled.");
+                        const remainingorders = orders.filter(order => order._id !== deleteId);
+                        setOrders(remainingorders);
+                    }
+                })
+        }
     };
 
     return (
@@ -84,14 +95,14 @@ const ManageOrders = () => {
                                                             <td>{order.quantity}</td>
                                                             {
                                                                 order.dstatus === "Shipped" ? (
-                                                                    <td className="text-warning">Shipped</td>
+                                                                    <td className="text-success fw-bolder">Shipped</td>
                                                                 ) : (
                                                                     <td onClick={() => handleShipping(order)} className="pointer ico text-main">Pending</td>
                                                                 )
                                                             }
                                                             {
                                                                 order.pstatus === "Paid" ? (
-                                                                    <td className="text-warning">Paid</td>
+                                                                    <td className="text-success fw-bolder">Paid</td>
                                                                 ) : (
                                                                     <td className="text-main">Unpaid</td>
                                                                 )
@@ -100,24 +111,8 @@ const ManageOrders = () => {
                                                                 order.pstatus === "Paid" ? (
                                                                     <td className="pointer">-</td>
                                                                 ) : (
-                                                                    <td>
+                                                                    <td onClick={() => handleConfirmation(order._id)}>
                                                                         <button className="btn text-danger p-0" data-bs-toggle="modal" data-bs-target="#confirmationModal">Delete</button>
-                                                                        <div className="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                                                            <div className="modal-dialog text-dark">
-                                                                                <div className="modal-content">
-                                                                                    <div className="modal-header">
-                                                                                        <h4 className="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
-                                                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div className="modal-body">
-                                                                                        <h5>Are you sure, you want to delete this order?</h5>
-                                                                                    </div>
-                                                                                    <div className="modal-footer">
-                                                                                        <button onClick={() => handleDeleteOrder(order._id)} type="button" className="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
                                                                     </td>
                                                                 )
                                                             }
@@ -128,6 +123,22 @@ const ManageOrders = () => {
                                         </table>
                                     )
                             }
+                            <div className="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                <div className="modal-dialog text-dark">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <h5>Are you sure, you want to delete this order?</h5>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button onClick={() => handleDeleteOrder()} type="button" className="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

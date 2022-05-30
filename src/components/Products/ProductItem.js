@@ -31,7 +31,7 @@ const ProductItem = ({ product }) => {
                     <div className="pb-3 text-center">
                         <p className='pt-2 mb-0 px-3 text-start'>Available Quantity: <span className='fw-bolder text-main'>{stock}</span></p>
                         <small className='d-block text-start text-main text-ss px-3 pb-3'>Minimum Order Quantity: {minOrder}</small>
-                        <button onClick={() => handleProductDetails(_id)} className='btn btn-dark shadow' to='/productdtails'>Order Now <FontAwesomeIcon className='ps-2' icon={faCaretRight} /></button>
+                        <button onClick={() => handleProductDetails(_id)} className='btn btn-dark shadow' to='/productdetails'>Order Now <FontAwesomeIcon className='ps-2' icon={faCaretRight} /></button>
                     </div>
                 </div>
             </div>

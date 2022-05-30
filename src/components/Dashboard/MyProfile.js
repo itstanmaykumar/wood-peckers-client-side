@@ -28,7 +28,7 @@ const MyProfile = () => {
 
         axios.put("https://wood-peckers.herokuapp.com/users", userUpdate)
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
                 if (res.data.acknowledged) {
                     toast.success("Profile is updated.");
                     navigate('/dashboard');

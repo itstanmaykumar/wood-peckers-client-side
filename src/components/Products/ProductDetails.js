@@ -3,6 +3,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axiosPrivate from '../../api/axiosPrivate';
 import { auth } from '../../firebase.init';
 import useProduct from '../../hooks/useProduct';
 import useUser from '../../hooks/useUser';
@@ -19,11 +20,12 @@ const ProductDetails = () => {
     const handleOrder = (e) => {
         e.preventDefault();
         const orderQuantity = parseInt(e.target.quantity.value);
+        const price = orderQuantity * parseFloat(product.price);
         let newOrder = {
             pid: product._id,
             title: product.name,
             quantity: orderQuantity,
-            total: orderQuantity * parseFloat(product.price),
+            total: parseInt(price),
             pstatus: "Pending",
             dstatus: "Pending",
             email: user.email,
@@ -45,7 +47,7 @@ const ProductDetails = () => {
             stock: updatedQuantity
         };
         //console.log(updatedProduct);
-        axios.put("https://wood-peckers.herokuapp.com/products", updatedProduct)
+        axiosPrivate.put("https://wood-peckers.herokuapp.com/products", updatedProduct)
             .then(res => {
                 //console.log(res.data);
             });

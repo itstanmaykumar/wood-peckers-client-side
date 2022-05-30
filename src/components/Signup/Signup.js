@@ -90,7 +90,7 @@ const Signup = () => {
         };
         if (newUser.name !== "") {
             handleAddUser(newUser);
-            console.log(newUser);
+            //console.log(newUser);
         }
     }, [googleUser]);
 
