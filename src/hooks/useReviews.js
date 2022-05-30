@@ -1,15 +1,11 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 
 const useReviews = () => {
-    const [reviews, setReviews] = useState([]);
-    useEffect(() => {
-        axios.get(`https://wood-peckers.herokuapp.com/reviews`)
-            .then(res => {
-                setReviews(res.data);
-            })
-    }, []);
-    return [reviews, setReviews];
+    const { isLoading, data } = useQuery("reviews", () =>
+        axios(`https://wood-peckers.herokuapp.com/reviews`)
+    );
+    return [isLoading, data];
 };
 
 export default useReviews;

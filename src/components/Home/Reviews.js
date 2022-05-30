@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useReviews from '../../hooks/useReviews';
@@ -7,10 +7,21 @@ import Slider from 'react-slick/lib/slider';
 
 const Reviews = () => {
 
-    const [reviews] = useReviews();
+    const [isLoading, data] = useReviews();
+
+    if (isLoading) {
+        return (
+            <div className="d-flex justify-content-center text-main">
+                <h1>Loading.....</h1>
+                <div className="mt-2 ms-2 spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+        );
+    }
+    let reviews = data?.data;
     const totalReviews = reviews.length;
-    // let filteredReviews = reviews.slice(totalReviews - 3, totalReviews);
-    let filteredReviews = reviews.slice(0, totalReviews);
+    let filteredReviews = reviews.slice(totalReviews - 6, totalReviews);
     filteredReviews = filteredReviews.reverse();
 
     const settings = {
