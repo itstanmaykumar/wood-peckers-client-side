@@ -6,54 +6,70 @@ const Blogs = () => {
             <div className="mx-auto px-3 pb-5 mx-3 my-5">
                 <h1 className="my-4 p-3 text-center">Explore Our Recent Blogs</h1>
                 <article className="p-5 rounded-10 shadow-lg">
-                    <h3 className="mb-3">Difference between Authentication and Authorization -</h3>
-                    <p>Authentication & Authorization are both used to maintain the safety of the resources of an automated system. Despite the similar-sounding terms, authentication and authorization are very different process with respect to each other. Authentication validates if the users are whom they claim to be. On the other hand, Authorization gives permission to access the resourses of the system. Authentication identifies the user, but authorization identifies the permission of accessibility of that user. Authentication is done before authorization. Authorization works through passwords & credentials, but authentication works through settings maintained by security teams.</p>
-                </article>
-                <article className="p-5 my-5 rounded-10 shadow-lg">
-                    <h3 className="mb-3">Why are you using firebase? What other options do you have to implement authentication?</h3>
-                    <p>I using Firebase to host my website and to authenticate my website.</p>
-                    <p>Firebase is a traditional Social Authentication method. It's is widely popular now-a-days. Though there exist some other methods of authentication. Such as -</p>
+                    <h3 className="mb-3">How will you improve the performance of a React Application?</h3>
                     <ul>
                         <li>
-                            <h5>Token Authentication</h5>
-                            <p>In this method, a digitally encoded signature is used to authenticate and authorize the correct user.</p>
+                            <p>Using local storage where necessary.</p>
                         </li>
                         <li className='my-3'>
-                            <h5>Standard Authentication</h5>
-                            <p>This method helps users authenticate by entering their credentials using a user id and a strong password.</p>
+                            <p>Preventing unnecessary re - renders.</p>
                         </li>
                         <li className='my-3'>
-                            <h5>Multi-Factor Authentication (MFA)</h5>
-                            <p>It is a multi-layered authentication method which examines the identity of users for login or other access permission.</p>
+                            <p>Using the useCallback hook.</p>
+                        </li>
+                        <li className='my-3'>
+                            <p>Using the useMemo hook.</p>
                         </li>
                         <li >
-                            <h5>Passwordless Authentication</h5>
-                            <p>In this method, a magic link, fingerprint, PIN, or a secret token delivered via email or text message is used to authenticate and authorize the correct user.</p>
+                            <p>Using dynamic import().</p>
+                        </li>
+                        <li >
+                            <p>Windowing or list virtualization.</p>
+                        </li>
+                        <li >
+                            <p>By lazy loading images.</p>
                         </li>
                     </ul>
                 </article>
                 <article className="p-5 my-5 rounded-10 shadow-lg">
-                    <h3 className="mb-3">What other services does firebase provide other than authentication?</h3>
+                    <h3 className="mb-3">What are the different ways to manage a state in a React application?</h3>
                     <div>
-                        <p>There are many services which Firebase provides, Most useful of them is Authentication. But there are also some useful services that help you to develop high-quality mobile and web applications. Such as -</p>
+                        <p>There are four main types of state you need to properly manage in your React apps. They are - </p>
                         <ul>
                             <li>
-                                <h5>Cloud Messaging</h5>
-                                <p>Firebase can implement notifications, and it is fast, reliable, and scalable.</p>
+                                <h5>Local state</h5>
+                                <p>It manages data in a single component.</p>
                             </li>
                             <li className='my-3'>
-                                <h5>Dynamic Links</h5>
-                                <p>Firebase can generate deep links which redirect user to your applications.</p>
+                                <h5>Global state</h5>
+                                <p>It manages data in multiple components.</p>
                             </li>
                             <li className='my-3'>
-                                <h5>Predictions</h5>
-                                <p>Firebase can help in making predictions about your application decisions with the help of google's AI.</p>
+                                <h5>Server state</h5>
+                                <p>By using SWR and React Query to manage server.</p>
                             </li>
                             <li >
-                                <h5>Google Analytics</h5>
-                                <p>Firebase can help in growing and managing your application. It can become helpful in tracking user demographics, behavior, purchasing patterns, revenue reports.</p>
+                                <h5>URL state</h5>
+                                <p>By fetching data based off of its url slug or id that is located in the URL.</p>
                             </li>
                         </ul>
+                    </div>
+                </article>
+                <article className="p-5 my-5 rounded-10 shadow-lg">
+                    <h3 className="mb-3">How does prototypical inheritance work?</h3>
+                    <p>Every object contains prototype. By prototyping, javascript adds new methods and properties in an exisiting object. Prototipical inheritence is such a method by which a particular object can inherit the properties and methods of another object. It allows us to reuse the properties and methods of a reference pointer function. This method uses ".prototype" to access the methods and properties.</p>
+                </article>
+                <article className="p-5 my-5 rounded-10 shadow-lg">
+                    <h3 className="mb-3">Why you do not set the state directly in React.For example, if you have const [products, setProducts] = useState([]). Why you do not set products=[...] instead, you use the setProducts?</h3>
+                    <p>Because products=[...] may change or replace the updates you've made in that components. You can loose all your updated data. Upon calling, it only returns present value. Thus you can loose control of the state of all components. That's why we use setProducts with useState(), rather than products = [...]. Thus the data doesn't get changed directly even if chnage the state. It changes the data only when setProduct is called.</p>
+                </article>
+                <article className="p-5 my-5 rounded-10 shadow-lg">
+                    <h3 className="mb-3">You have an array of products.Each product has a name, price, description, etc.How will you implement a search to find products by name?</h3>
+                    <div>
+                        <p>By using .find() we can search in the array.</p>
+                        <p>For example,</p>
+                        <p className='fw-bold'> const expectedProduct = arrayOfProducts.find((product) => product.name === "searchKeyword");</p>
+                        <p><span className='fw-bolder'>expectedProduct</span> contains your desired object.</p>
                     </div>
                 </article>
             </div>
