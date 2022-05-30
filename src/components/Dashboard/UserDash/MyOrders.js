@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axiosPrivate from '../../../api/axiosPrivate';
 import { auth } from '../../../firebase.init';
@@ -10,8 +9,6 @@ import DashNav from '../DashNav';
 const MyOrders = () => {
     const [orders, setOrders] = useState([]);
     const [user] = useAuthState(auth);
-    const navigate = useNavigate();
-
 
     const getMyOrders = async () => {
         const email = user?.email;
@@ -82,18 +79,18 @@ const MyOrders = () => {
                                                         <button onClick={() => handlePayment(order._id)} className="btn btn-warning d-block w-100 mb-2">Pay Now</button>
                                                         <button className="btn btn-main d-block w-100" data-bs-toggle="modal" data-bs-target="#confirmationModal">Cancel</button>
 
-                                                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <div className="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                                            <div className="modal-dialog">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header">
+                                                                        <h4 className="modal-title fw-bolder text-main" id="confirmationModalLabel">Please Confirm</h4>
+                                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <div class="modal-body">
+                                                                    <div className="modal-body">
                                                                         <h5>Are you sure, you want to cancel this order?</h5>
                                                                     </div>
-                                                                    <div class="modal-footer">
-                                                                        <button onClick={() => handleCancelOrder(order._id)} type="button" class="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
+                                                                    <div className="modal-footer">
+                                                                        <button onClick={() => handleCancelOrder(order._id)} type="button" className="btn btn-main" data-bs-dismiss="modal">Cancel Order</button>
                                                                     </div>
                                                                 </div>
                                                             </div>

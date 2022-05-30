@@ -47,10 +47,7 @@ const Navbar = () => {
                             <Link className="nav-link" to="/blogs">Blogs</Link>
                         </li>
                         <li className="nav-item me-2">
-                            <Link className="nav-link" to="/info">Info</Link>
-                        </li>
-                        <li className="nav-item me-2">
-                            <Link className="nav-link" to="/contact">Contact</Link>
+                            <Link className="nav-link" to="/portfolio">Portfolio</Link>
                         </li>
                         {
                             user?.uid &&

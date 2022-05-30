@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import AdminRoute from "./components/AdminRoute/AdminRoute";
+import Blogs from "./components/Blogs/Blogs";
 import AddProduct from "./components/Dashboard/AdminDash/AddProduct";
 import MakeAdmin from "./components/Dashboard/AdminDash/MakeAdmin";
 import ManageOrders from "./components/Dashboard/AdminDash/ManageOrders";
@@ -12,6 +13,7 @@ import AddReview from "./components/Dashboard/UserDash/AddReview";
 import MyOrders from "./components/Dashboard/UserDash/MyOrders";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
+import Portfolio from "./components/Portfolio/Portfolio";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ProductDetails from "./components/Products/ProductDetails";
 import Products from "./components/Products/Products";
@@ -74,6 +76,8 @@ function App() {
             <MakeAdmin></MakeAdmin>
           </AdminRoute>
         }></Route>
+        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+        <Route path="/portfolio" element={<Portfolio></Portfolio>}></Route>
         <Route path="/signin" element={<Signin></Signin>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
